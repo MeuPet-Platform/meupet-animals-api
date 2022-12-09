@@ -5,7 +5,6 @@ public abstract class Animal {
 	protected String raca;
 	protected  double peso;
 	protected  char sexo;
-	protected Vacina[] vacina = new Vacina[40];
 	
 	
 	public Animal(String nome,String raca,double peso,char sexo) {
@@ -13,14 +12,6 @@ public abstract class Animal {
 		this.raca = raca;
 		this.peso = peso;
 		this.sexo = sexo;
-	}
-
-	public Vacina[] getVacina() {
-		return this.vacina;
-	}
-
-	public void setVacina(Vacina[] vacina) {
-		this.vacina = vacina;
 	}
 
 	public String getNome() {
