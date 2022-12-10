@@ -78,7 +78,7 @@ public class Ave extends Animal {
 		this.sexo = sexo;
 	}
 
-	public boolean isExotico() {
+	public boolean getExotico() {
 		return exotico;
 	}
 

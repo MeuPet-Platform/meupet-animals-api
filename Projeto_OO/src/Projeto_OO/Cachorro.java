@@ -71,7 +71,15 @@ public class Cachorro extends Animal{
 	public void setSexo(char sexo) {
 		this.sexo = sexo;
 	}
+	
+	public boolean getNecessitaFocinheira() {
+		return necessitaFocinheira;
+	}
 
+	public void setNecessitaFocinheira(boolean necessitaFocinheira) {
+		this.necessitaFocinheira = necessitaFocinheira;
+	}
+	
 	public boolean getManso() {
 		return manso;
 	}
@@ -80,13 +88,7 @@ public class Cachorro extends Animal{
 		this.manso = manso;
 	}
 
-	public boolean getNecessitaFocinheira() {
-		return necessitaFocinheira;
-	}
-
-	public void setNecessitaFocinheira(boolean necessitaFocinheira) {
-		this.necessitaFocinheira = necessitaFocinheira;
-	}
+	
 
 
 	
