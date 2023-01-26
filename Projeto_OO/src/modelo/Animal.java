@@ -1,13 +1,26 @@
-package Projeto_OO;
+package modelo;
 
+/**
+ * Classe que representa um Animal, que possui nome,raça,peso e sexo.
+ * @author Diego Sousa Leite
+ * @since 2022
+ * @version 1.0
+ */
 public abstract class Animal {
 	protected String nome;
 	protected String raca;
-	protected  double peso;
-	protected  char sexo;
+	protected double peso;
+	protected String sexo;
 	
 	
-	public Animal(String nome,String raca,double peso,char sexo) {
+	/**
+	 * Construtor Animal
+	 * @param nome
+	 * @param raca
+	 * @param peso
+	 * @param sexo
+	 */
+	public Animal(String nome,String raca,double peso,String sexo) {
 		this.nome = nome;
 		this.raca = raca;
 		this.peso = peso;
@@ -38,13 +51,14 @@ public abstract class Animal {
 		this.peso = peso;
 	}
 	
-	public char getSexo() {
+	public String getSexo() {
 		return sexo;
 	}
 	
-	public void setSexo(char sexo) {
+	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
+	
 	
 	
 }
