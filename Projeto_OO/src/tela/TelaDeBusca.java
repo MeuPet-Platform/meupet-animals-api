@@ -18,12 +18,14 @@ public class TelaDeBusca implements ActionListener {
 	private int animal;
 	int opcao;
 	/**
-	 * Permite o usuario digitar o id da figurinha que deseja buscar
+	 * Permite o usuario digitar o nome do animal que deseja buscar
 	 * @param opcao define a opção de busca 
-	 * (1) opcao = 1 figurinha
+	 * (1) opcao = ave
+	 * (2) opcao = cachorro
+	 * (3) opcao = gato
+	 * (4) opcao = vacina
 	 */
 	public void mostrarTela(int opcao, ControleDados dados){
-		//opcao 1 = figurinha
 		this.dados = dados;
 		this.opcao = opcao;
 		janela = new JFrame("Busca de Animal");
@@ -79,7 +81,7 @@ public class TelaDeBusca implements ActionListener {
 				}
 				
 			}
-			if(opcao == 2) {
+			if(opcao == 2) {//mostra tela para busca de um cachorro
 				String nomeCachorro = valorNomeAnimal.getText();
 				animal = dados.encontrarCachorro(nomeCachorro);
 				if(animal<99999) {
@@ -88,7 +90,7 @@ public class TelaDeBusca implements ActionListener {
 					mensagemErro();
 				}
 			}
-			if(opcao == 3) {
+			if(opcao == 3) {//mostra tela para busca de um gato
 				String nomeGato = valorNomeAnimal.getText();
 				animal = dados.encontrarGato(nomeGato);
 				if(animal<99999) {
@@ -97,7 +99,7 @@ public class TelaDeBusca implements ActionListener {
 					mensagemErro();
 				}
 			}
-			if(opcao == 4) {
+			if(opcao == 4) {//mostra tela para busca de uma vacina
 				String nomeVacina = valorNomeAnimal.getText();
 				animal = dados .encontrarVacina(nomeVacina);
 				if(animal<99999) {

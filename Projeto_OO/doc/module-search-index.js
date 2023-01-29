@@ -1,1 +1,1 @@
-moduleSearchIndex = [{"l":"Projeto_OO"}];updateSearchResults();
+moduleSearchIndex = [];updateSearchResults();

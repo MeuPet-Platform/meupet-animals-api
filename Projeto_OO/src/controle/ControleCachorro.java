@@ -59,6 +59,10 @@ public class ControleCachorro {
 		return c[i].getNecessitaFocinheira();
 	}
 	
+	public String getVacinado(int i) {
+		return c[i].getVacinado();
+	}
+	
 	public void setQtdCachorros(int qtdCachorros) {
 		this.qtdCachorros = qtdCachorros;
 	}

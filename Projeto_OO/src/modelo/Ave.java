@@ -19,12 +19,15 @@ public class Ave extends Animal {
 	 * @param asaC
 	 * @param gaiola
 	 * @param exotico
+	 * @param vacinado
 	 */
-	public Ave( String nome ,String raca,double peso,String sexo,String asaC, String gaiola,String exotico) {
-		super(nome, raca, peso, sexo);
+	public Ave( String nome ,String raca,double peso,String sexo,String asaC, String gaiola,
+			String exotico,String vacinado) {
+		super(nome, raca, peso, sexo,vacinado);
 		asaCortada = asaC;
 		emGaiola = gaiola;
 		this.setExotico(exotico);
+		
 	}
 	
 	public String getAsaCortada() {
@@ -105,6 +108,7 @@ public class Ave extends Animal {
 				+ "\nÉ exótico : "
 				+ exotico;
 	}
+
 
 
 }

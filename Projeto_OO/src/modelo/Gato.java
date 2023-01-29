@@ -20,9 +20,11 @@ public class Gato extends Animal {
 	 * @param unhas
 	 * @param gostaA
 	 * @param tamanhoPelo
+	 * @param vacinado
 	 */
-	public Gato(String nome ,String raca,double peso,String sexo,String unhas,String gostaA,String tamanhoPelo) {
-		super(nome, raca, peso, sexo);
+	public Gato(String nome ,String raca,double peso,String sexo,String unhas,String gostaA,
+			String tamanhoPelo,String vacinado) {
+		super(nome, raca, peso, sexo,vacinado);
 		unhasCortadas = unhas;
 		gostaDeAgua = gostaA;
 		this.tamanhoPelo = tamanhoPelo;

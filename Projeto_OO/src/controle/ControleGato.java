@@ -66,4 +66,8 @@ public class ControleGato {
 	public String getTamanhoPelo(int i) {
 		return g[i].getTamanhoPelo();
 	}
+	
+	public String getVacinado(int i) {
+		return g[i].getVacinado();
+	}
 }

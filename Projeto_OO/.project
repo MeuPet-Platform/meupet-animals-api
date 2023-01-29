@@ -14,4 +14,16 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>Class Diagram - Final.png</name>
+			<type>1</type>
+			<location>C:/Users/Soous/Downloads/Projetos UML/Class Diagram - Final.png</location>
+		</link>
+		<link>
+			<name>Diagrama de Pacotes.png</name>
+			<type>1</type>
+			<location>C:/Users/Soous/Downloads/Diagrama de Pacotes.png</location>
+		</link>
+	</linkedResources>
 </projectDescription>

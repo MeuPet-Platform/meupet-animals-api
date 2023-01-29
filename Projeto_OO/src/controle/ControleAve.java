@@ -68,4 +68,8 @@ public class ControleAve {
 		return a[i].getExotico();
 	}
 	
+	public String getVacinado(int i) {
+		return a[i].getVacinado();
+	}
+	
 }

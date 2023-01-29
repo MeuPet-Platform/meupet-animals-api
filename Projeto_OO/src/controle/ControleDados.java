@@ -6,7 +6,7 @@ public class ControleDados {
 	private Dados d = new Dados();
 	
 	public ControleDados() {
-		d.fillWithSomeData();
+		d.addDados();
 		
 	}
 	
@@ -56,16 +56,13 @@ public class ControleDados {
 	 * @return boolean, true indicando que a operação foi bem sucedida
 	 */
 	public boolean inserirEditarAve(String[] dadosAves) {
-	//	if(!dadosAves[3].matches("[0-9]+") || !dadosAves[4].matches("[0-9]+") ||
-		//		!dadosAves[5].matches("[0-9]+") || !dadosAves[6].matches("[0-9]+")) {
-			//return false;
-		//} else {
+	
 			Ave a = new Ave(dadosAves[1],dadosAves[2], 
 					Double.parseDouble(dadosAves[3]),dadosAves[4],
-					dadosAves[5],dadosAves[6],dadosAves[7]);
+					dadosAves[5],dadosAves[6],dadosAves[7],dadosAves[8]);
 			d.inserirEditarAve(a, Integer.parseInt(dadosAves[0]));
 			return true;
-	//	}
+	
 	}
 	
 	/**
@@ -74,16 +71,13 @@ public class ControleDados {
 	 * @return boolean, true indicando que a operação foi bem sucedida
 	 */
 	public boolean inserirEditarGato(String[] dadosGatos) {
-//		if(!dadosGatos[3].matches("[0-9]+") || !dadosGatos[4].matches("[0-9]+") ||
-	//			!dadosGatos[5].matches("[0-9]+") || !dadosGatos[6].matches("[0-9]+")) {
-		//	return false;
-		//} else {
+
 			Gato g = new Gato(dadosGatos[1], dadosGatos[2], 
 					Double.parseDouble(dadosGatos[3]), dadosGatos[4],
-					dadosGatos[5],dadosGatos[6],dadosGatos[7]);
+					dadosGatos[5],dadosGatos[6],dadosGatos[7],dadosGatos[8]);
 			d.inserirEditarGato(g, Integer.parseInt(dadosGatos[0]));
 			return true;
-		//}
+		
 	}
 	
 	/**
@@ -92,16 +86,14 @@ public class ControleDados {
 	 * @return boolean, true indicando que a operação foi bem sucedida
 	 */
 	public boolean inserirEditarCachorro(String[] dadosCachorros) {
-		//if(!dadosCachorros[3].matches("[0-9]+") || !dadosCachorros[4].matches("[0-9]+") ||
-			//	!dadosCachorros[5].matches("[0-9]+") || !dadosCachorros[6].matches("[0-9]+")) {
-			//return false;
-		//} else {
+		
 			Cachorro c = new Cachorro(dadosCachorros[1], dadosCachorros[2], 
 					Double.parseDouble(dadosCachorros[3]), dadosCachorros[4],
-					dadosCachorros[5],dadosCachorros[6],dadosCachorros[7]);
+					dadosCachorros[5],dadosCachorros[6],dadosCachorros[7],
+					dadosCachorros[8]);
 			d.inserirEditarCachorro(c, Integer.parseInt(dadosCachorros[0]));
 			return true;
-	//	}
+	
 	}
 	
 	/**
@@ -110,15 +102,12 @@ public class ControleDados {
 	 * @return boolean, true indicando que a operação foi bem sucedida
 	 */
 	public boolean inserirEditarVacina(String[] dadosVacinas) {
-	//	if(!dadosVacinas[3].matches("[0-9]+") || !dadosVacinas[4].matches("[0-9]+") ||
-		//		!dadosVacinas[5].matches("[0-9]+") || !dadosVacinas[6].matches("[0-9]+")) {
-			//return false;
-		//} else {
+	
 			Vacina v = new Vacina(dadosVacinas[1],dadosVacinas[2], 
 					dadosVacinas[3]);
 			d.inserirEditarVacina(v, Integer.parseInt(dadosVacinas[0]));
 			return true;
-		//}
+		
 	}
 	
 	/**
@@ -234,6 +223,11 @@ public class ControleDados {
 		
 	}
 	
+	/**
+	 * Compara o nome recebido com os cadastrados para achar a ave
+	 * @param nome,representa o nome digitado pelo usuario
+	 * @return int,indica a posição do animal com o nome indicado
+	 */
 	public int encontrarAve(String nome) {
 		int aveSelecionada = 0;
 		for(int i = 0;i<d.getQtdAves();i++) {
@@ -247,6 +241,11 @@ public class ControleDados {
 		
 	}
 	
+	/**
+	 * Compara o nome recebido com os cadastrados para achar o cachorro
+	 * @param nome,representa o nome digitado pelo usuario
+	 * @return int,indica a posição do animal com o nome indicado
+	 */
 	public int encontrarCachorro(String nome) {
 		int cachorroSelecionado = 0;
 		for(int i = 0;i<d.getQtdCachorros();i++) {
@@ -259,6 +258,11 @@ public class ControleDados {
 		return 99999;	
 	}
 	
+	/**
+	 * Compara o nome recebido com os cadastrados para achar o gato
+	 * @param nome,representa o nome digitado pelo usuario
+	 * @return int,indica a posição do animal com o nome indicado
+	 */
 	public int encontrarGato(String nome) {
 		int gatoSelecionado = 0;
 		for(int i = 0;i<d.getQtdGatos();i++) {
@@ -271,7 +275,11 @@ public class ControleDados {
 		return 99999;
 		
 	}
-	
+	/**
+	 * Compara o nome recebido com os cadastrados para achar a vacina
+	 * @param nome,representa o nome digitado pelo usuario
+	 * @return int,indica a posição do animal com o nome indicado
+	 */
 	public int encontrarVacina(String nome) {
 		int vacinaSelecionada = 0;
 		for(int i = 0;i<d.getQtdVacinas();i++) {

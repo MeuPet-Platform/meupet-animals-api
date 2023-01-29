@@ -22,12 +22,12 @@ public class Dados {
 	 * Atribui uma informação para o respectivo objeto a cada iteração do for
 	 * 
 	 */
-	public void fillWithSomeData() {
+	public void addDados() {
 		for(int i =0;i<5;i++) {
-			aves[i] = new Ave("Tico"+i,"Papagaio"+i, 10, "Macho","Sim" , "Sim", "Sim"); 
-			cachorros[i] = new Cachorro("Billy"+i,"Shit izu"+i, 10, "Macho","Sim" , "Sim", "Médio"); 
-			gatos[i] = new Gato("Tobias"+i,"Sem raça"+i, 10, "Femea","Sim" , "Sim", "Pequeno"); 
-			vacinas[i] = new Vacina("tuberculose"+i,"12/02/2021", "Sim");
+			aves[i] = new Ave("Tico"+i,"Papagaio"+i, 10, "Macho","Sim" , "Sim", "Sim","tuberculose1"); 
+			cachorros[i] = new Cachorro("Billy"+i,"Shit izu"+i, 10, "Macho","Sim" , "Sim", "Médio","tuberculose3"); 
+			gatos[i] = new Gato("Tobias"+i,"Sem raça"+i, 10, "Femea","Sim" , "Sim", "Pequeno","tuberculose4"); 
+			vacinas[i] = new Vacina("antirrábica"+i,"12/02/2021", "Sim");
 		}
 		qtdAves = 5;
 		qtdCachorros = 5;

@@ -20,9 +20,11 @@ public class Cachorro extends Animal{
 	 * @param manso
 	 * @param focinheira
 	 * @param porte
+	 * @param vacinado
 	 */
-	public Cachorro(String nome ,String raca,double peso,String sexo,String manso,String focinheira,String porte) {
-		super(nome, raca, peso, sexo);
+	public Cachorro(String nome ,String raca,double peso,String sexo,String manso,String focinheira,
+			String porte,String vacinado) {
+		super(nome, raca, peso, sexo,vacinado);
 		this.manso = manso;
 		necessitaFocinheira = focinheira;
 		this.porte = porte;
