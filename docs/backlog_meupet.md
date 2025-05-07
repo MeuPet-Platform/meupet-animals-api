@@ -1,7 +1,7 @@
 
-# 📋 Backlog de Histórias de Usuário – Projeto MeuPet
+# Backlog de Histórias de Usuário – Projeto MeuPet
 
-## 🐾 Épico: Gerenciar animais de estimação
+## Épico: Gerenciar animais de estimação
 
 ### HU01 - Cadastrar ave
 **Como** tutor,  
@@ -30,7 +30,7 @@
 
 ---
 
-## 💉 Épico: Gerenciar vacinação dos animais
+## Épico: Gerenciar vacinação dos animais
 
 ### HU04 - Cadastrar vacina
 **Como** tutor,  
@@ -48,7 +48,7 @@
 
 ---
 
-## 🗃️ Épico: Visualizar e editar dados
+## Épico: Visualizar e editar dados
 
 ### HU06 - Editar dados de um animal
 **Como** tutor,  
@@ -64,7 +64,7 @@
 
 ---
 
-## 💾 Épico: Armazenamento e persistência de dados
+## Épico: Armazenamento e persistência de dados
 
 ### HU08 - Armazenar dados no sistema
 **Como** sistema,  
@@ -72,7 +72,7 @@
 **para que** eles não se percam entre sessões.
 
 ---
-## 👤 Épico: Autenticação e Segurança
+## Épico: Autenticação e Segurança
 
 ### HU09 - Cadastro de usuário
 **Como** novo usuário,  
@@ -103,7 +103,7 @@
 
 ---
 
-## 🧑‍⚕️ Épico: Acesso administrativo
+## Épico: Acesso administrativo
 
 ### HU13 - Cadastrar novo animal para cliente
 **Como** administrador,  
