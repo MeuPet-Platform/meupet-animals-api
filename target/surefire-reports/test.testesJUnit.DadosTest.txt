@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: test.testesJUnit.DadosTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 3, Time elapsed: 3.840 s -- in test.testesJUnit.DadosTest

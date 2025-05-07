@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: quarkus_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: meupet
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 10s
+      retries: 10
+
+  app:
+    image: projeto-tppe:1.0.0
+    container_name: quarkus_app
+    ports:
+      - "8081:8081"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      QUARKUS_DATASOURCE_JDBC_URL: jdbc:mysql://mysql:3306/meupet
+      QUARKUS_DATASOURCE_USERNAME: root
+      QUARKUS_DATASOURCE_PASSWORD: root
+
+volumes:
+  mysql_data:
