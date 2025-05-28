@@ -1,5 +1,6 @@
 package com.meupet.api.dto.animal;
 
+import com.meupet.api.enums.PorteEnum;
 import com.meupet.api.enums.SexoAnimalEnum;
 import com.meupet.api.enums.StatusVacinacaoEnum;
 import lombok.*;
@@ -15,4 +16,6 @@ public abstract class RequisicaoAnimalDTO {
     protected double peso;
     protected SexoAnimalEnum sexo;
     protected StatusVacinacaoEnum vacinado;
+    private PorteEnum porte;
+
 }

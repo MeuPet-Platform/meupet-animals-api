@@ -40,8 +40,8 @@ public class ControleCachorro {
 		return c[i].getNome();
 	}
 	
-	public String getPorte(int i) {
-		return c[i].getPorte();
+	public String getPort(int i) {
+		return c[i].getPort();
 	}
 	
 	public String getRaca(int i) {

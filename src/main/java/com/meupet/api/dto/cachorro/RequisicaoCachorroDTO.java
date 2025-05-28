@@ -12,5 +12,4 @@ public class RequisicaoCachorroDTO extends RequisicaoAnimalDTO {
 
     private boolean manso;
     private boolean necessitaFocinheira;
-    private PorteEnum porte;
 }

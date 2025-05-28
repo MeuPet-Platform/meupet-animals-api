@@ -126,7 +126,7 @@ public class TelaDetalheAnimal implements ActionListener {
 			sexoA.setSelectedItem(d.getCachorros()[pos].getSexo());
 			eManso.setSelectedItem(d.getCachorros()[pos].getManso());
 			necFocinheira.setSelectedItem(d.getCachorros()[pos].getNecessitaFocinheira());
-			porteDog.setSelectedItem(d.getCachorros()[pos].getPorte());
+			porteDog.setSelectedItem(d.getCachorros()[pos].getPort());
 			vacina.setSelectedItem(d.getCachorros()[pos].getVacinado());
 		}
 		// Preenche dados com dados do gato clicado
