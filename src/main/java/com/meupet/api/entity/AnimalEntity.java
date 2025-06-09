@@ -10,6 +10,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "animal")
 @Getter
@@ -29,10 +31,15 @@ public class AnimalEntity extends PanacheEntity {
     @Enumerated(EnumType.STRING)
     protected StatusVacinacaoEnum vacinado;
 
+    @OneToMany(mappedBy = "animal", cascade = CascadeType.ALL, orphanRemoval = true)
+    public List<VacinaEntity> historicoVacinacao;
+
     @Enumerated(EnumType.STRING)
     private PorteEnum porte;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_usuario")
     public UsuarioEntity tutor;
+
+
 }
