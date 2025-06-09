@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AveEntity extends PanacheEntity {
+public class AveEntity extends AnimalEntity {
 
     private boolean asaCortada;
     private boolean emGaiola;

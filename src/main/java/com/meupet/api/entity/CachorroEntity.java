@@ -14,7 +14,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class CachorroEntity extends PanacheEntity {
+public class CachorroEntity extends AnimalEntity {
     private boolean manso;
     private boolean necessitaFocinheira;
 
