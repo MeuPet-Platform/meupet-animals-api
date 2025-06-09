@@ -23,6 +23,6 @@ public class UsuarioEntity extends PanacheEntity {
     public String email;
     public String senha;
 
-    public List<RequisicaoAnimalDTO> animais;
+    public List<AnimalEntity> animais;
 
 }
