@@ -1,7 +1,7 @@
 package com.meupet.api.entity;
 
-import com.meupet.api.dto.animal.RequisicaoAnimalDTO;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import jakarta.persistence.*;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -23,6 +23,7 @@ public class UsuarioEntity extends PanacheEntity {
     public String email;
     public String senha;
 
+    @OneToMany(mappedBy = "tutor", fetch = FetchType.LAZY)
     public List<AnimalEntity> animais;
 
 }
