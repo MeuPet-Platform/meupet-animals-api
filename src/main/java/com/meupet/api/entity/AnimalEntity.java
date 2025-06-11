@@ -41,5 +41,4 @@ public class AnimalEntity extends PanacheEntity {
     @JoinColumn(name = "id_usuario")
     public UsuarioEntity tutor;
 
-
 }
