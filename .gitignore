@@ -9,3 +9,6 @@
 
 # Ignora diretórios e arquivos gerados pelo Maven/Quarkus
 target/
+
+# IntelliJ IDEA files
+.idea/
