@@ -1,4 +1,4 @@
-package com.meupet.api.controller;
+package com.meupet.api.resource;
 
 import com.meupet.api.dto.animal.RequisicaoAnimalDTO; // Supondo um DTO genérico
 import com.meupet.api.dto.cachorro.RequisicaoCachorroDTO;
