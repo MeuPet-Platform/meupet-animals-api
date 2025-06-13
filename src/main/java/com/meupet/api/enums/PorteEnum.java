@@ -1,5 +1,6 @@
 package com.meupet.api.enums;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum PorteEnum {
@@ -21,10 +22,16 @@ public enum PorteEnum {
         return descricao;
     }
 
+    @JsonCreator
     public static PorteEnum getPorte(String descricao) {
         if (descricao == null || descricao.trim().isEmpty()) {
             return NAO_INFORMADO;
         }
+
+        if ("Medio".equalsIgnoreCase(descricao.trim())) {
+            return MEDIO;
+        }
+
         for (PorteEnum porte : PorteEnum.values()) {
             if (porte.descricao.equalsIgnoreCase(descricao.trim())) {
                 return porte;

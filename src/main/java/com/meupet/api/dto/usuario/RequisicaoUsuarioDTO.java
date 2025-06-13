@@ -1,18 +1,19 @@
 package com.meupet.api.dto.usuario;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import lombok.Data;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class RequisicaoUsuarioDTO {
 
-    public String nome;
-    public String email;
-    public String senha;
+    @NotBlank(message = "O nome não pode estar em branco.")
+    private String nome;
 
+    @NotBlank(message = "O e-mail não pode estar em branco.")
+    @Email(message = "O formato do e-mail é inválido.")
+    private String email;
+
+    @NotBlank(message = "A senha não pode estar em branco.")
+    private String senha;
 }
