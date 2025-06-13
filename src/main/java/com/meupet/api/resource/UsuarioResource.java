@@ -56,7 +56,7 @@ public class UsuarioResource {
     @APIResponse(responseCode = "21", description = "Usuário criado com sucesso", content = @Content(schema = @Schema(implementation = RespostaUsuarioDTO.class)))
     public Response criar(RequisicaoUsuarioDTO dto) {
         UsuarioEntity entity = mapper.toEntity(dto);
-        // Lembre-se de adicionar a lógica para criptografar a senha aqui!
+        //TODO Adicionar criptografia de senha
         entity.persist();
         return Response.status(Response.Status.CREATED).entity(mapper.toRespostaDTO(entity)).build();
     }
