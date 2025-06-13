@@ -1,6 +1,5 @@
 package com.meupet.api.resource;
 
-import com.meupet.api.dto.animal.RequisicaoAnimalDTO; // Supondo um DTO genérico
 import com.meupet.api.dto.cachorro.RequisicaoCachorroDTO;
 import com.meupet.api.dto.gato.RequisicaoGatoDTO;
 import com.meupet.api.dto.ave.RequisicaoAveDTO;
@@ -8,7 +7,7 @@ import com.meupet.api.entity.AnimalEntity;
 import com.meupet.api.entity.CachorroEntity;
 import com.meupet.api.entity.GatoEntity;
 import com.meupet.api.entity.AveEntity;
-import com.meupet.api.mapper.AnimalMapper; // Supondo um mapper
+import com.meupet.api.mapper.AnimalMapper;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
