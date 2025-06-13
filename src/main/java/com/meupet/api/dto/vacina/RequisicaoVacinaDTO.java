@@ -1,5 +1,9 @@
 package com.meupet.api.dto.vacina;
 
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,8 +17,13 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class RequisicaoVacinaDTO {
 
+    @NotBlank(message = "O tipo da vacina não pode estar em branco.")
     private String tipoVacina;
-    private LocalDate dataVacina;
-    private LocalDate revacina;
 
+    @NotNull(message = "A data da vacina é obrigatória.")
+    @PastOrPresent(message = "A data da vacina não pode ser no futuro.")
+    private LocalDate dataVacina;
+
+    @Future(message = "A data da revacinação deve ser no futuro.")
+    private LocalDate revacina;
 }

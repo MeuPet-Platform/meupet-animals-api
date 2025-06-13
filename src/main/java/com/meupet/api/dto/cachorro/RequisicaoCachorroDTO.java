@@ -1,7 +1,7 @@
 package com.meupet.api.dto.cachorro;
 
 import com.meupet.api.dto.animal.RequisicaoAnimalDTO;
-import com.meupet.api.enums.PorteEnum;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Getter
@@ -10,6 +10,9 @@ import lombok.*;
 @NoArgsConstructor
 public class RequisicaoCachorroDTO extends RequisicaoAnimalDTO {
 
+    @NotNull(message = "O campo 'manso' é obrigatório.")
     private boolean manso;
+
+    @NotNull(message = "O campo 'necessitaFocinheira' é obrigatório.")
     private boolean necessitaFocinheira;
 }

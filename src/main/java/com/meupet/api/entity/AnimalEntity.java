@@ -1,5 +1,6 @@
 package com.meupet.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.meupet.api.enums.PorteEnum;
 import com.meupet.api.enums.SexoAnimalEnum;
 import com.meupet.api.enums.StatusVacinacaoEnum;
@@ -32,6 +33,7 @@ public class AnimalEntity extends PanacheEntity {
     protected StatusVacinacaoEnum vacinado;
 
     @OneToMany(mappedBy = "animal", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     public List<VacinaEntity> historicoVacinacao;
 
     @Enumerated(EnumType.STRING)
