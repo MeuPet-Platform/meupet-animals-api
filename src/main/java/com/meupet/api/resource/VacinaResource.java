@@ -5,6 +5,7 @@ import com.meupet.api.dto.vacina.RespostaVacinaDTO;
 import com.meupet.api.entity.AnimalEntity;
 import com.meupet.api.entity.VacinaEntity;
 import com.meupet.api.mapper.VacinaMapper;
+import com.meupet.api.service.AnimalService;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.ws.rs.*;
@@ -23,6 +24,9 @@ public class VacinaResource {
 
     @Inject
     VacinaMapper mapper;
+
+    @Inject // Injeta a nossa classe de serviço
+    AnimalService animalService;
 
     @GET
     @Operation(summary = "Listar todas as vacinas de um animal")
@@ -43,15 +47,16 @@ public class VacinaResource {
     @Operation(summary = "Adicionar uma nova vacina a um animal")
     public Response adicionarVacina(@PathParam("idAnimal") Long idAnimal, RequisicaoVacinaDTO dto) {
         return AnimalEntity.<AnimalEntity>findByIdOptional(idAnimal)
+                .map(AnimalEntity.class::cast)
                 .map(animal -> {
                     VacinaEntity novaVacina = mapper.toEntity(dto);
-                    novaVacina.animal = animal;
-                    novaVacina.persist();
+                    novaVacina.setAnimal(animal);
 
-                    // PONTO CRÍTICO: Após adicionar a vacina, você deve recalcular
-                    // e atualizar o campo 'vacinado' (StatusVacinacaoEnum) na entidade 'animal'.
-                    // Ex: animal.setVacinado(meuServicoDeCalculo.calcularStatus(animal.historicoVacinacao));
-                    //     animal.persist();
+                    animal.getHistoricoVacinacao().add(novaVacina);
+
+                    animalService.recalcularEAtualizarStatusVacinacao(animal);
+
+                    animal.persist();
 
                     return Response.status(Response.Status.CREATED).entity(mapper.toRespostaDTO(novaVacina)).build();
                 })
