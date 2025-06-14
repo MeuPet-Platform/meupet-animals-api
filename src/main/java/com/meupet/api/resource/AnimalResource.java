@@ -3,10 +3,7 @@ package com.meupet.api.resource;
 import com.meupet.api.dto.cachorro.RequisicaoCachorroDTO;
 import com.meupet.api.dto.gato.RequisicaoGatoDTO;
 import com.meupet.api.dto.ave.RequisicaoAveDTO;
-import com.meupet.api.entity.AnimalEntity;
-import com.meupet.api.entity.CachorroEntity;
-import com.meupet.api.entity.GatoEntity;
-import com.meupet.api.entity.AveEntity;
+import com.meupet.api.entity.*;
 import com.meupet.api.enums.StatusVacinacaoEnum;
 import com.meupet.api.mapper.AnimalMapper;
 import jakarta.inject.Inject;
@@ -21,6 +18,7 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Path("/animais")
 @Produces(MediaType.APPLICATION_JSON)
@@ -37,7 +35,17 @@ public class AnimalResource {
     @Operation(summary = "Criar novo cachorro")
     @APIResponse(responseCode = "201", description = "Cachorro criado com sucesso")
     public Response criarCachorro(@Valid RequisicaoCachorroDTO dto) {
+
+        Optional<UsuarioEntity> tutorOptional = UsuarioEntity.findByIdOptional(dto.getIdTutor());
+        if (tutorOptional.isEmpty()) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("Tutor com ID " + dto.getIdTutor() + " não encontrado.").build();
+        }
+
+        UsuarioEntity tutorEncontrado = tutorOptional.get();
         CachorroEntity cachorro = mapper.toCachorroEntity(dto);
+
+        cachorro.setTutor(tutorEncontrado);
 
         cachorro.setVacinado(StatusVacinacaoEnum.NAO_VACINADO);
         cachorro.setHistoricoVacinacao(new ArrayList<>());
@@ -52,7 +60,17 @@ public class AnimalResource {
     @Operation(summary = "Criar novo gato")
     @APIResponse(responseCode = "201", description = "Gato criado com sucesso")
     public Response criarGato(@Valid RequisicaoGatoDTO dto) {
+
+        Optional<UsuarioEntity> tutorOptional = UsuarioEntity.findByIdOptional(dto.getIdTutor());
+        if (tutorOptional.isEmpty()) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("Tutor com ID " + dto.getIdTutor() + " não encontrado.").build();
+        }
+
+        UsuarioEntity tutorEncontrado = tutorOptional.get();
         GatoEntity gato = mapper.toGatoEntity(dto);
+
+        gato.setTutor(tutorEncontrado);
 
         gato.setVacinado(StatusVacinacaoEnum.NAO_VACINADO);
         gato.setHistoricoVacinacao(new ArrayList<>());
@@ -67,7 +85,17 @@ public class AnimalResource {
     @Operation(summary = "Criar nova ave")
     @APIResponse(responseCode = "201", description = "Ave criada com sucesso")
     public Response criarAve(@Valid RequisicaoAveDTO dto) {
+
+        Optional<UsuarioEntity> tutorOptional = UsuarioEntity.findByIdOptional(dto.getIdTutor());
+        if (tutorOptional.isEmpty()) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("Tutor com ID " + dto.getIdTutor() + " não encontrado.").build();
+        }
+
+        UsuarioEntity tutorEncontrado = tutorOptional.get();
         AveEntity ave = mapper.toAveEntity(dto);
+
+        ave.setTutor(tutorEncontrado);
 
         ave.setVacinado(StatusVacinacaoEnum.NAO_VACINADO);
         ave.setHistoricoVacinacao(new ArrayList<>());

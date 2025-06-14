@@ -29,4 +29,7 @@ public abstract class RequisicaoAnimalDTO {
 
     @NotNull(message = "O porte do animal deve ser informado.")
     private PorteEnum porte;
+
+    @NotNull(message = "O ID do tutor é obrigatório.")
+    private Long idTutor;
 }
