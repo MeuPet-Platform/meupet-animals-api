@@ -6,8 +6,10 @@ import com.meupet.api.entity.AnimalEntity;
 import com.meupet.api.entity.VacinaEntity;
 import com.meupet.api.mapper.VacinaMapper;
 import com.meupet.api.service.AnimalService;
+import io.quarkus.hibernate.orm.panache.Panache;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -45,17 +47,18 @@ public class VacinaResource {
     @POST
     @Transactional
     @Operation(summary = "Adicionar uma nova vacina a um animal")
-    public Response adicionarVacina(@PathParam("idAnimal") Long idAnimal, RequisicaoVacinaDTO dto) {
+    public Response adicionarVacina(@PathParam("idAnimal") Long idAnimal, @Valid RequisicaoVacinaDTO dto) {
         return AnimalEntity.<AnimalEntity>findByIdOptional(idAnimal)
                 .map(AnimalEntity.class::cast)
                 .map(animal -> {
                     VacinaEntity novaVacina = mapper.toEntity(dto);
-                    novaVacina.setAnimal(animal);
+                    novaVacina.animal = animal; // Estabelece a relação
 
-                    animal.getHistoricoVacinacao().add(novaVacina);
+                    novaVacina.persistAndFlush();
+
+                    Panache.getEntityManager().refresh(animal);
 
                     animalService.recalcularEAtualizarStatusVacinacao(animal);
-
                     animal.persist();
 
                     return Response.status(Response.Status.CREATED).entity(mapper.toRespostaDTO(novaVacina)).build();

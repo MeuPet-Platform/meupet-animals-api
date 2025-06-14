@@ -5,6 +5,7 @@ import com.meupet.api.entity.UsuarioEntity;
 import com.meupet.api.mapper.UsuarioMapper;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -54,7 +55,7 @@ public class UsuarioResource {
     @Transactional
     @Operation(summary = "Criar novo usuário", description = "Cadastra um novo usuário no sistema.")
     @APIResponse(responseCode = "21", description = "Usuário criado com sucesso", content = @Content(schema = @Schema(implementation = RespostaUsuarioDTO.class)))
-    public Response criar(RequisicaoUsuarioDTO dto) {
+    public Response criar(@Valid RequisicaoUsuarioDTO dto) {
         UsuarioEntity entity = mapper.toEntity(dto);
         //TODO Adicionar criptografia de senha
         entity.persist();

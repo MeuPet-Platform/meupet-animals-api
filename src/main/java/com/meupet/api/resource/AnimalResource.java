@@ -7,9 +7,11 @@ import com.meupet.api.entity.AnimalEntity;
 import com.meupet.api.entity.CachorroEntity;
 import com.meupet.api.entity.GatoEntity;
 import com.meupet.api.entity.AveEntity;
+import com.meupet.api.enums.StatusVacinacaoEnum;
 import com.meupet.api.mapper.AnimalMapper;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -17,6 +19,7 @@ import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Path("/animais")
@@ -33,8 +36,12 @@ public class AnimalResource {
     @Transactional
     @Operation(summary = "Criar novo cachorro")
     @APIResponse(responseCode = "201", description = "Cachorro criado com sucesso")
-    public Response criarCachorro(RequisicaoCachorroDTO dto) {
+    public Response criarCachorro(@Valid RequisicaoCachorroDTO dto) {
         CachorroEntity cachorro = mapper.toCachorroEntity(dto);
+
+        cachorro.setVacinado(StatusVacinacaoEnum.NAO_VACINADO);
+        cachorro.setHistoricoVacinacao(new ArrayList<>());
+
         cachorro.persist();
         return Response.status(Response.Status.CREATED).entity(cachorro).build();
     }
@@ -44,8 +51,12 @@ public class AnimalResource {
     @Transactional
     @Operation(summary = "Criar novo gato")
     @APIResponse(responseCode = "201", description = "Gato criado com sucesso")
-    public Response criarGato(RequisicaoGatoDTO dto) {
+    public Response criarGato(@Valid RequisicaoGatoDTO dto) {
         GatoEntity gato = mapper.toGatoEntity(dto);
+
+        gato.setVacinado(StatusVacinacaoEnum.NAO_VACINADO);
+        gato.setHistoricoVacinacao(new ArrayList<>());
+
         gato.persist();
         return Response.status(Response.Status.CREATED).entity(gato).build();
     }
@@ -55,8 +66,12 @@ public class AnimalResource {
     @Transactional
     @Operation(summary = "Criar nova ave")
     @APIResponse(responseCode = "201", description = "Ave criada com sucesso")
-    public Response criarAve(RequisicaoAveDTO dto) {
+    public Response criarAve(@Valid RequisicaoAveDTO dto) {
         AveEntity ave = mapper.toAveEntity(dto);
+
+        ave.setVacinado(StatusVacinacaoEnum.NAO_VACINADO);
+        ave.setHistoricoVacinacao(new ArrayList<>());
+
         ave.persist();
         return Response.status(Response.Status.CREATED).entity(ave).build();
     }
