@@ -15,7 +15,6 @@ public enum SexoAnimalEnum {
         this.descricao = descricao;
     }
 
-
     @JsonValue
     public String getDescricao() {
         return descricao;
@@ -26,8 +25,15 @@ public enum SexoAnimalEnum {
         if (descricao == null || descricao.trim().isEmpty()) {
             return NAO_INFORMADO;
         }
+
+        // Lógica de comparação melhorada
+        String descLimpa = descricao.trim();
+        if ("Femea".equalsIgnoreCase(descLimpa)) {
+            return FEMEA;
+        }
+
         for (SexoAnimalEnum sexo : SexoAnimalEnum.values()) {
-            if (sexo.descricao.equalsIgnoreCase(descricao.trim())) {
+            if (sexo.descricao.equalsIgnoreCase(descLimpa)) {
                 return sexo;
             }
         }
