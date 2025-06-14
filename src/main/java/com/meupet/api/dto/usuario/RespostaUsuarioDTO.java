@@ -6,10 +6,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class RespostaUsuarioDTO {
+public class RespostaUsuarioDTO extends RespostaUsuarioResumoDTO {
 
-    private Long id;
-    private String nome;
-    private String email;
     private List<RespostaAnimalDTO> animais;
 }

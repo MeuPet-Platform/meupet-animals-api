@@ -1,5 +1,6 @@
 package com.meupet.api.resource;
 
+import com.meupet.api.dto.animal.RespostaAnimalDTO;
 import com.meupet.api.dto.cachorro.RequisicaoCachorroDTO;
 import com.meupet.api.dto.gato.RequisicaoGatoDTO;
 import com.meupet.api.dto.ave.RequisicaoAveDTO;
@@ -19,6 +20,7 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Path("/animais")
 @Produces(MediaType.APPLICATION_JSON)
@@ -105,19 +107,22 @@ public class AnimalResource {
     }
 
     @GET
-    @Operation(summary = "Listar todos os animais", description = "Retorna uma lista de todos os animais, independentemente do tipo.")
-    public List<AnimalEntity> listarTodos() {
-        return AnimalEntity.listAll();
+    @Operation(summary = "Listar todos os animais")
+    public List<RespostaAnimalDTO> listarTodos() {
+        List<AnimalEntity> animais = AnimalEntity.listAll();
+        return animais.stream()
+                .map(mapper::toRespostaDTO)
+                .collect(Collectors.toList());
     }
+
 
     @GET
     @Path("/{id}")
     @Operation(summary = "Buscar animal por ID")
-    @APIResponse(responseCode = "200", description = "Animal encontrado")
-    @APIResponse(responseCode = "404", description = "Animal não encontrado")
     public Response buscarPorId(@PathParam("id") Long id) {
         return AnimalEntity.findByIdOptional(id)
-                .map(animal -> Response.ok(animal).build())
+                .map(AnimalEntity.class::cast)
+                .map(animal -> Response.ok(mapper.toRespostaDTO(animal)).build())
                 .orElse(Response.status(Response.Status.NOT_FOUND).build());
     }
 
