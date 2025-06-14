@@ -1,6 +1,8 @@
 package com.meupet.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.meupet.api.enums.PorteEnum;
 import com.meupet.api.enums.SexoAnimalEnum;
 import com.meupet.api.enums.StatusVacinacaoEnum;
@@ -20,6 +22,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class AnimalEntity extends PanacheEntity {
 
     protected String nome;
