@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
-@Mapper(componentModel = "cdi", uses = AnimalMapper.class)
+@Mapper(componentModel = "jakarta", uses = AnimalMapper.class)
 public interface UsuarioMapper {
 
     @Mapping(target = "id", ignore = true)

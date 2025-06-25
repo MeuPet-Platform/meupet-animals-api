@@ -13,7 +13,7 @@ import org.mapstruct.*;
 
 import java.util.stream.Collectors;
 
-@Mapper(componentModel = "cdi", uses = VacinaMapper.class)
+@Mapper(componentModel = "jakarta", uses = VacinaMapper.class)
 public interface AnimalMapper {
 
 
