@@ -3,11 +3,14 @@ package com.meupet.api.mapper;
 import com.meupet.api.dto.usuario.RequisicaoUsuarioDTO;
 import com.meupet.api.dto.usuario.RespostaUsuarioDTO;
 import com.meupet.api.entity.UsuarioEntity;
+import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
-@Mapper(componentModel = "jakarta", uses = AnimalMapper.class)
+@Mapper(componentModel = "cdi",
+        injectionStrategy = InjectionStrategy.CONSTRUCTOR,
+        uses = AnimalMapper.class)
 public interface UsuarioMapper {
 
     @Mapping(target = "id", ignore = true)

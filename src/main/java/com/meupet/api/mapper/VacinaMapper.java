@@ -3,12 +3,10 @@ package com.meupet.api.mapper;
 import com.meupet.api.dto.vacina.RequisicaoVacinaDTO;
 import com.meupet.api.dto.vacina.RespostaVacinaDTO;
 import com.meupet.api.entity.VacinaEntity;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.*;
 
-@Mapper(componentModel = "jakarta",
+@Mapper(componentModel = "cdi",
+        injectionStrategy = InjectionStrategy.CONSTRUCTOR,
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface VacinaMapper {
 
