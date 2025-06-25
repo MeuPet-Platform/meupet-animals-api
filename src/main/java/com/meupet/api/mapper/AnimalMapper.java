@@ -13,9 +13,7 @@ import org.mapstruct.*;
 
 import java.util.stream.Collectors;
 
-@Mapper(componentModel = "cdi",
-        injectionStrategy = InjectionStrategy.CONSTRUCTOR,
-        uses = VacinaMapper.class)
+@Mapper(uses = VacinaMapper.class)
 public interface AnimalMapper {
 
 

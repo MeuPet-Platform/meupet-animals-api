@@ -14,6 +14,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,8 +25,7 @@ import java.util.stream.Collectors;
 @Tag(name = "Usuários", description = "Operações para gerenciamento de usuários.")
 public class UsuarioResource {
 
-    @Inject
-    UsuarioMapper mapper;
+    private final UsuarioMapper mapper = Mappers.getMapper(UsuarioMapper.class);
 
     @GET
     @Operation(summary = "Listar todos os usuários", description = "Retorna uma lista de todos os usuários cadastrados.")

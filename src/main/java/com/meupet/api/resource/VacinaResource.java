@@ -15,6 +15,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import org.mapstruct.factory.Mappers;
 
 import java.util.stream.Collectors;
 
@@ -24,8 +25,8 @@ import java.util.stream.Collectors;
 @Tag(name = "Vacinas", description = "Gerenciamento do histórico de vacinação de um animal.")
 public class VacinaResource {
 
-    @Inject
-    VacinaMapper mapper;
+    private final VacinaMapper mapper = Mappers.getMapper(VacinaMapper.class);
+
 
     @Inject // Injeta a nossa classe de serviço
     AnimalService animalService;

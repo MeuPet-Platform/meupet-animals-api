@@ -8,9 +8,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
-@Mapper(componentModel = "cdi",
-        injectionStrategy = InjectionStrategy.CONSTRUCTOR,
-        uses = AnimalMapper.class)
+@Mapper(uses = AnimalMapper.class)
 public interface UsuarioMapper {
 
     @Mapping(target = "id", ignore = true)

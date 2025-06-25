@@ -3,6 +3,7 @@ package com.meupet.api.resource;
 import com.meupet.api.dto.vacina.RequisicaoVacinaDTO;
 import com.meupet.api.entity.AnimalEntity;
 import com.meupet.api.entity.VacinaEntity;
+import com.meupet.api.mapper.UsuarioMapper;
 import com.meupet.api.mapper.VacinaMapper;
 import com.meupet.api.service.AnimalService;
 import jakarta.inject.Inject;
@@ -13,6 +14,7 @@ import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import org.mapstruct.factory.Mappers;
 
 @Path("/vacinas")
 @Produces(MediaType.APPLICATION_JSON)
@@ -20,8 +22,8 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 @Tag(name = "Vacinas", description = "Operações diretas em registros de vacinas individuais.")
 public class VacinaIndividualResource {
 
-    @Inject
-    VacinaMapper mapper;
+    private final VacinaMapper mapper = Mappers.getMapper(VacinaMapper.class);
+
 
     @Inject
     AnimalService animalService;

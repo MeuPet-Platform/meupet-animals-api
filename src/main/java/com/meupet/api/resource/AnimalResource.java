@@ -16,6 +16,7 @@ import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import org.mapstruct.factory.Mappers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +29,8 @@ import java.util.stream.Collectors;
 @Tag(name = "Animais", description = "Operações para gerenciamento de todos os tipos de animais.")
 public class AnimalResource {
 
-    @Inject
-    AnimalMapper mapper;
+
+    private final AnimalMapper mapper = Mappers.getMapper(AnimalMapper.class);
 
     @POST
     @Path("/cachorro")
