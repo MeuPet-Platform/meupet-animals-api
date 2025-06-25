@@ -54,7 +54,10 @@ public class AnimalResource {
         cachorro.setHistoricoVacinacao(new ArrayList<>());
 
         cachorro.persist();
-        return Response.status(Response.Status.CREATED).entity(cachorro).build();
+
+
+        RespostaAnimalDTO respostaDTO = mapper.toRespostaDTO(cachorro);
+        return Response.status(Response.Status.CREATED).entity(respostaDTO).build();
     }
 
     @POST
@@ -79,7 +82,10 @@ public class AnimalResource {
         gato.setHistoricoVacinacao(new ArrayList<>());
 
         gato.persist();
-        return Response.status(Response.Status.CREATED).entity(gato).build();
+
+        RespostaAnimalDTO respostaDTO = mapper.toRespostaDTO(gato);
+
+        return Response.status(Response.Status.CREATED).entity(respostaDTO).build();
     }
 
     @POST
@@ -104,7 +110,9 @@ public class AnimalResource {
         ave.setHistoricoVacinacao(new ArrayList<>());
 
         ave.persist();
-        return Response.status(Response.Status.CREATED).entity(ave).build();
+
+        RespostaAnimalDTO respostaDTO = mapper.toRespostaDTO(ave);
+        return Response.status(Response.Status.CREATED).entity(respostaDTO).build();
     }
 
     @GET
