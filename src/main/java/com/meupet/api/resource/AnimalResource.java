@@ -7,12 +7,14 @@ import com.meupet.api.dto.ave.RequisicaoAveDTO;
 import com.meupet.api.entity.*;
 import com.meupet.api.enums.StatusVacinacaoEnum;
 import com.meupet.api.mapper.AnimalMapper;
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
@@ -27,10 +29,14 @@ import java.util.stream.Collectors;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @Tag(name = "Animais", description = "Operações para gerenciamento de todos os tipos de animais.")
+@RolesAllowed({"USER", "ADMIN"})
 public class AnimalResource {
 
 
     private final AnimalMapper mapper = Mappers.getMapper(AnimalMapper.class);
+
+    @Inject
+    JsonWebToken jwt;
 
     @POST
     @Path("/cachorro")

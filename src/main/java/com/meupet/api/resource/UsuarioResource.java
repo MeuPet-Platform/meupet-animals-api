@@ -3,7 +3,11 @@ package com.meupet.api.resource;
 import com.meupet.api.dto.usuario.*;
 import com.meupet.api.entity.UsuarioEntity;
 import com.meupet.api.mapper.UsuarioMapper;
+import io.smallrye.jwt.build.Jwt;
 import jakarta.inject.Inject;
+import io.quarkus.elytron.security.common.BcryptUtil;
+
+
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import jakarta.ws.rs.*;
@@ -16,7 +20,11 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.mapstruct.factory.Mappers;
 
+import java.time.Duration;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import org.jboss.logging.Logger;
 import java.util.stream.Collectors;
 
 @Path("/usuarios")
@@ -27,6 +35,10 @@ public class UsuarioResource {
 
     private final UsuarioMapper mapper = Mappers.getMapper(UsuarioMapper.class);
 
+
+    @Inject
+    Logger log;
+
     @GET
     @Operation(summary = "Listar todos os usuários", description = "Retorna uma lista de todos os usuários cadastrados.")
     @APIResponse(responseCode = "200", description = "Lista de usuários", content = @Content(schema = @Schema(implementation = RespostaUsuarioDTO[].class)))
@@ -36,6 +48,33 @@ public class UsuarioResource {
                 .map(mapper::toRespostaDTO)
                 .collect(Collectors.toList());
     }
+
+    @POST
+    @Path("/login")
+    @Operation(summary = "Logar na conta", description = "Faz login na conta do usuário")
+    @APIResponse(responseCode = "200", description = "Login com sucesso", content = @Content(schema = @Schema(implementation = RespostaUsuarioDTO.class)))
+    @APIResponse(responseCode = "401", description = "Não autorizado")
+    public Response login(@Valid RequisicaoLoginDTO loginDTO) {
+
+        UsuarioEntity usuario = UsuarioEntity.find("email", loginDTO.getEmail()).firstResult();
+
+        if (usuario != null && BcryptUtil.matches(loginDTO.getSenha(), usuario.getSenha())) {
+            String token = Jwt.issuer("https://meupet.api/issuer")
+                    .upn(usuario.email)
+                    .subject(String.valueOf(usuario.id))
+                    .groups(new HashSet<>(Arrays.asList("USER", "ADMIN"))) // permissões
+                    .expiresIn(Duration.ofHours(24))
+                    .sign();
+
+            return Response.ok(new RespostaTokenDTO(token)).build();
+        }
+
+        return Response.status(Response.Status.UNAUTHORIZED)
+                .entity("E-mail ou senha inválidos.")
+                .build();
+
+    }
+
 
     @GET
     @Path("/{id}")
@@ -57,7 +96,11 @@ public class UsuarioResource {
     @APIResponse(responseCode = "21", description = "Usuário criado com sucesso", content = @Content(schema = @Schema(implementation = RespostaUsuarioDTO.class)))
     public Response criar(@Valid RequisicaoUsuarioDTO dto) {
         UsuarioEntity entity = mapper.toEntity(dto);
-        //TODO Adicionar criptografia de senha
+
+        String senhaHasheada = BcryptUtil.bcryptHash(dto.getSenha());
+
+        entity.setSenha(senhaHasheada);
+
         entity.persist();
         return Response.status(Response.Status.CREATED).entity(mapper.toRespostaDTO(entity)).build();
     }
@@ -91,4 +134,6 @@ public class UsuarioResource {
         }
         return Response.status(Response.Status.NOT_FOUND).build();
     }
+
+
 }
