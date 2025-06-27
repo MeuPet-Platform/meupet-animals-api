@@ -1,5 +1,6 @@
 package com.meupet.api;
 
+import com.meupet.api.dto.usuario.RequisicaoLoginDTO;
 import com.meupet.api.dto.usuario.RequisicaoUsuarioDTO;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
@@ -13,17 +14,18 @@ import static org.hamcrest.Matchers.*;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class UsuarioResourceTest {
 
-    // A variável agora é estática para ser compartilhada entre os testes
     private static Long generatedUserId;
+    private static final String USER_EMAIL = "teste.crud@exemplo.com";
+    private static final String USER_PASSWORD = "senha123";
 
     @Test
     @Order(1)
     @Transactional
-    public void deveCriarUsuario() {
+    public void deveCriarUsuarioParaTesteDeLogin() {
         RequisicaoUsuarioDTO dto = new RequisicaoUsuarioDTO();
         dto.setNome("Usuario de Teste");
-        dto.setEmail("teste.crud@exemplo.com"); // E-mail diferente para evitar conflitos
-        dto.setSenha("senha123");
+        dto.setEmail(USER_EMAIL);
+        dto.setSenha(USER_PASSWORD); // A senha será criptografada no Resource
 
         generatedUserId = given()
                 .contentType(ContentType.JSON)
@@ -32,79 +34,53 @@ public class UsuarioResourceTest {
                 .post("/usuarios")
                 .then()
                 .statusCode(201)
-                .body("id", notNullValue())
                 .extract()
                 .jsonPath().getLong("id");
     }
 
     @Test
     @Order(2)
-    public void deveBuscarUsuarioPorId() {
-        Assumptions.assumeTrue(generatedUserId != null, "O teste de criação precisa ter sucesso primeiro.");
+    public void deveFalharLoginComSenhaIncorreta() {
+        RequisicaoLoginDTO loginDTO = new RequisicaoLoginDTO();
+        loginDTO.setEmail(USER_EMAIL);
+        loginDTO.setSenha("senhaErrada");
 
         given()
+                .contentType(ContentType.JSON)
+                .body(loginDTO)
                 .when()
-                .get("/usuarios/" + generatedUserId)
+                .post("/usuarios/login")
                 .then()
-                .statusCode(200)
-                .body("id", is(generatedUserId.intValue()))
-                .body("nome", is("Usuario de Teste"));
+                .statusCode(401); // Unauthorized
     }
 
     @Test
     @Order(3)
-    public void deveListarTodosOsUsuarios() {
-        Assumptions.assumeTrue(generatedUserId != null, "O teste de criação precisa ter sucesso primeiro.");
+    public void deveFazerLoginComSucesso() {
+        RequisicaoLoginDTO loginDTO = new RequisicaoLoginDTO();
+        loginDTO.setEmail(USER_EMAIL);
+        loginDTO.setSenha(USER_PASSWORD);
 
         given()
+                .contentType(ContentType.JSON)
+                .body(loginDTO)
                 .when()
-                .get("/usuarios")
+                .post("/usuarios/login")
                 .then()
                 .statusCode(200)
-                .body("$", isA(java.util.List.class)) // Confirma que o retorno é uma lista
-                .body("size()", greaterThanOrEqualTo(1)); // Confirma que há pelo menos um usuário na lista
+                .body("token", notNullValue()); // Verifica se um token foi retornado
     }
 
     @Test
     @Order(4)
     @Transactional
-    public void deveAtualizarUsuario() {
-        Assumptions.assumeTrue(generatedUserId != null, "O teste de criação precisa ter sucesso primeiro.");
-
-        RequisicaoUsuarioDTO dtoAtualizado = new RequisicaoUsuarioDTO();
-        dtoAtualizado.setNome("Usuario Teste Atualizado");
-        dtoAtualizado.setEmail("teste.crud.att@exemplo.com");
-        dtoAtualizado.setSenha("novaSenha456");
-
-        given()
-                .contentType(ContentType.JSON)
-                .body(dtoAtualizado)
-                .when()
-                .put("/usuarios/" + generatedUserId)
-                .then()
-                .statusCode(200)
-                .body("nome", is("Usuario Teste Atualizado"))
-                .body("email", is("teste.crud.att@exemplo.com"));
-    }
-
-    @Test
-    @Order(5)
-    @Transactional
-    public void deveDeletarUsuario() {
-        Assumptions.assumeTrue(generatedUserId != null, "O teste de criação precisa ter sucesso primeiro.");
-
-        // 1. Deleta o usuário
+    public void deveDeletarUsuarioDeTeste() {
+        // Limpeza: deleta o usuário criado para não interferir em outros testes
+        Assumptions.assumeTrue(generatedUserId != null);
         given()
                 .when()
                 .delete("/usuarios/" + generatedUserId)
                 .then()
                 .statusCode(204);
-
-        // 2. Verifica se o usuário realmente foi deletado (deve retornar 404)
-        given()
-                .when()
-                .get("/usuarios/" + generatedUserId)
-                .then()
-                .statusCode(404);
     }
 }

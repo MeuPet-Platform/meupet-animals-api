@@ -144,15 +144,14 @@ public class AnimalResource {
     @PUT
     @Path("/cachorro/{id}")
     @Transactional
-    @Operation(summary = "Atualizar um cachorro existente", description = "Atualiza os dados de um cachorro específico pelo seu ID.")
-    @APIResponse(responseCode = "200", description = "Cachorro atualizado com sucesso")
-    @APIResponse(responseCode = "404", description = "Cachorro não encontrado")
+    @Operation(summary = "Atualizar um cachorro existente")
     public Response atualizarCachorro(@PathParam("id") Long id, RequisicaoCachorroDTO dto) {
         return CachorroEntity.<CachorroEntity>findByIdOptional(id)
                 .map(cachorro -> {
                     mapper.updateCachorroFromDTO(dto, cachorro);
                     cachorro.persist();
-                    return Response.ok(cachorro).build();
+                    RespostaAnimalDTO respostaDTO = mapper.toRespostaDTO(cachorro);
+                    return Response.ok(respostaDTO).build();
                 })
                 .orElse(Response.status(Response.Status.NOT_FOUND).build());
     }
@@ -168,7 +167,8 @@ public class AnimalResource {
                 .map(gato -> {
                     mapper.updateGatoFromDTO(dto, gato);
                     gato.persist();
-                    return Response.ok(gato).build();
+                    RespostaAnimalDTO respostaDTO = mapper.toRespostaDTO(gato);
+                    return Response.ok(respostaDTO).build();
                 })
                 .orElse(Response.status(Response.Status.NOT_FOUND).build());
     }
@@ -184,7 +184,8 @@ public class AnimalResource {
                 .map(ave -> {
                     mapper.updateAveFromDTO(dto, ave);
                     ave.persist();
-                    return Response.ok(ave).build();
+                    RespostaAnimalDTO respostaDTO = mapper.toRespostaDTO(ave);
+                    return Response.ok(respostaDTO).build();
                 })
                 .orElse(Response.status(Response.Status.NOT_FOUND).build());
     }
