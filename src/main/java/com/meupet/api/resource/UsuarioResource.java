@@ -1,7 +1,9 @@
 package com.meupet.api.resource;
 
+import com.meupet.api.dto.animal.RespostaAnimalDTO;
 import com.meupet.api.dto.usuario.*;
 import com.meupet.api.entity.UsuarioEntity;
+import com.meupet.api.mapper.AnimalMapper;
 import com.meupet.api.mapper.UsuarioMapper;
 import io.smallrye.jwt.build.Jwt;
 import jakarta.inject.Inject;
@@ -19,6 +21,8 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 import org.mapstruct.factory.Mappers;
+import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
+
 
 import java.time.Duration;
 import java.util.Arrays;
@@ -34,6 +38,7 @@ import java.util.stream.Collectors;
 public class UsuarioResource {
 
     private final UsuarioMapper mapper = Mappers.getMapper(UsuarioMapper.class);
+    private final AnimalMapper animalMapper = Mappers.getMapper(AnimalMapper.class);
 
 
     @Inject
@@ -133,6 +138,30 @@ public class UsuarioResource {
             return Response.noContent().build();
         }
         return Response.status(Response.Status.NOT_FOUND).build();
+    }
+
+    @GET
+    @Path("/{id}/animais")
+    @Operation(summary = "Listar animais de um usuário específico",
+            description = "Retorna uma lista de todos os animais pertencentes a um usuário específico.")
+    @APIResponse(responseCode = "200", description = "Lista de animais do usuário",
+            content = @Content(schema = @Schema(implementation = RespostaAnimalDTO[].class)))
+    @APIResponse(responseCode = "404", description = "Usuário não encontrado")
+    public Response listarAnimaisPorUsuario(@Parameter(description = "ID do usuário") @PathParam("id") Long id) {
+
+
+        return UsuarioEntity.<UsuarioEntity>findByIdOptional(id)
+                .map(usuario -> {
+                    List<RespostaAnimalDTO> animaisDTO = usuario.animais.stream()
+                            .map(animalMapper::toRespostaDTO)
+                            .collect(Collectors.toList());
+
+
+                    return Response.ok(animaisDTO).build();
+                })
+                .orElse(Response.status(Response.Status.NOT_FOUND)
+                        .entity("Usuário não encontrado.")
+                        .build());
     }
 
 
