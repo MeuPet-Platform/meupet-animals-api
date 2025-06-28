@@ -27,7 +27,6 @@ class RequisicaoUsuarioDTOTest {
         validator = factory.getValidator();
     }
 
-    // Este método fornece os dados para o teste abaixo. Cada argumento é um caso de teste.
     private static Stream<RequisicaoUsuarioDTO> casosDeUsuarioInvalido() {
         return Stream.of(
                 // Caso 1: Nome em branco
@@ -44,22 +43,18 @@ class RequisicaoUsuarioDTOTest {
     @ParameterizedTest
     @MethodSource("casosDeUsuarioInvalido") // Indica que os dados vêm do método acima
     void deveDetectarCamposInvalidos(RequisicaoUsuarioDTO dto) {
-        // Act: Valida o objeto DTO
+
         Set<ConstraintViolation<RequisicaoUsuarioDTO>> violations = validator.validate(dto);
 
-        // Assert: Garante que pelo menos uma violação de validação foi encontrada
         assertFalse(violations.isEmpty(), "Deveria ter encontrado violações de validação para o DTO inválido.");
     }
 
     @Test
     void deveValidarUsuarioComDadosCorretos() {
-        // Arrange
         RequisicaoUsuarioDTO dto = criarDTO("Nome Valido", "valido@email.com", "senha123");
 
-        // Act
         Set<ConstraintViolation<RequisicaoUsuarioDTO>> violations = validator.validate(dto);
 
-        // Assert
         assertEquals(0, violations.size(), "Não deveria encontrar violações para um DTO válido.");
     }
 
