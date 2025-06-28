@@ -62,9 +62,16 @@ public interface AnimalMapper {
         return null; // Ou lançar uma exceção
     }
 
+
     // MÉTODOS AUXILIARES QUE O MAPSTRUCT IMPLEMENTARÁ
+    @Mapping(target = "tipoAnimal", constant = "Cachorro")
     RespostaCachorroDTO toCachorroRespostaDTO(CachorroEntity cachorro);
+
+    @Mapping(target = "tipoAnimal", constant = "Gato")
     RespostaGatoDTO toGatoRespostaDTO(GatoEntity gato);
+
+    @Mapping(target = "tipoAnimal", constant = "Ave")
     RespostaAveDTO toAveRespostaDTO(AveEntity ave);
+
     RespostaUsuarioResumoDTO toTutorResumoDTO(UsuarioEntity usuario);
 }

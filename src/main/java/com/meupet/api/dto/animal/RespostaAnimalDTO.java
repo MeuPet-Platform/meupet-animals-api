@@ -35,4 +35,5 @@ public abstract class RespostaAnimalDTO {
     private PorteEnum porte;
     private RespostaUsuarioResumoDTO tutor;
     private List<RespostaVacinaDTO> historicoVacinacao;
+    private String tipoAnimal;
 }
