@@ -25,8 +25,6 @@ public abstract class RequisicaoAnimalDTO {
     @NotNull(message = "O sexo do animal deve ser informado.")
     protected SexoAnimalEnum sexo;
 
-    protected StatusVacinacaoEnum vacinado;
-
     @NotNull(message = "O porte do animal deve ser informado.")
     private PorteEnum porte;
 

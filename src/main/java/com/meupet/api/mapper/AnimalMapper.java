@@ -13,7 +13,7 @@ import org.mapstruct.*;
 
 import java.util.stream.Collectors;
 
-@Mapper(uses = VacinaMapper.class)
+@Mapper(uses = VacinaMapper.class, nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface AnimalMapper {
 
 
