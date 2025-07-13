@@ -5,7 +5,7 @@ import com.meupet.api.dto.vacina.RespostaVacinaDTO;
 import com.meupet.api.entity.VacinaEntity;
 import org.mapstruct.*;
 
-@Mapper
+@Mapper(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface VacinaMapper {
 
     RespostaVacinaDTO toRespostaDTO(VacinaEntity entity);

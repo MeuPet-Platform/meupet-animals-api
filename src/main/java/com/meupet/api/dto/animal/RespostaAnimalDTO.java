@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.meupet.api.dto.ave.RespostaAveDTO;
 import com.meupet.api.dto.cachorro.RespostaCachorroDTO;
 import com.meupet.api.dto.gato.RespostaGatoDTO;
-import com.meupet.api.dto.usuario.RespostaUsuarioResumoDTO;
 import com.meupet.api.dto.vacina.RespostaVacinaDTO;
 import com.meupet.api.enums.PorteEnum;
 import com.meupet.api.enums.SexoAnimalEnum;
@@ -33,7 +32,7 @@ public abstract class RespostaAnimalDTO {
     private SexoAnimalEnum sexo;
     private StatusVacinacaoEnum vacinado;
     private PorteEnum porte;
-    private RespostaUsuarioResumoDTO tutor;
+    private Long idTutor;
     private List<RespostaVacinaDTO> historicoVacinacao;
     private String tipoAnimal;
 }

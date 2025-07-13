@@ -66,4 +66,49 @@ public class VacinaResource {
                 })
                 .orElse(Response.status(Response.Status.NOT_FOUND).entity("Animal não encontrado.").build());
     }
+
+    @PUT
+    @Path("/{idVacina}")
+    @Transactional
+    @Operation(summary = "Atualizar um registro de vacina")
+    public Response atualizarVacina(@PathParam("idAnimal") Long idAnimal,
+                                    @PathParam("idVacina") Long idVacina,
+                                    RequisicaoVacinaDTO dto) {
+
+        return VacinaEntity.<VacinaEntity>findByIdOptional(idVacina)
+                .map(vacina -> {
+                    if (!vacina.getAnimal().id.equals(idAnimal)) {
+                        return Response.status(Response.Status.CONFLICT).entity("Vacina não pertence ao animal informado.").build();
+                    }
+
+                    mapper.updateEntityFromDTO(dto, vacina);
+                    animalService.recalcularEAtualizarStatusVacinacao(vacina.getAnimal());
+
+                    return Response.ok(mapper.toRespostaDTO(vacina)).build();
+                })
+                .orElse(Response.status(Response.Status.NOT_FOUND).build());
+    }
+
+    @DELETE
+    @Path("/{idVacina}")
+    @Transactional
+    @Operation(summary = "Deletar um registro de vacina")
+    public Response deletarVacina(@PathParam("idAnimal") Long idAnimal,
+                                  @PathParam("idVacina") Long idVacina) {
+
+        return VacinaEntity.<VacinaEntity>findByIdOptional(idVacina)
+                .map(vacina -> {
+                    if (!vacina.getAnimal().id.equals(idAnimal)) {
+                        return Response.status(Response.Status.CONFLICT).entity("Vacina não pertence ao animal informado.").build();
+                    }
+
+                    AnimalEntity animal = vacina.getAnimal();
+                    animal.getHistoricoVacinacao().remove(vacina);
+
+                    animalService.recalcularEAtualizarStatusVacinacao(animal);
+
+                    return Response.noContent().build();
+                })
+                .orElse(Response.status(Response.Status.NOT_FOUND).build());
+    }
 }

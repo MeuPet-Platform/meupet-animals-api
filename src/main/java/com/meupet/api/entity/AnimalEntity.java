@@ -39,14 +39,11 @@ public class AnimalEntity extends PanacheEntity {
     protected StatusVacinacaoEnum vacinado;
 
     @OneToMany(mappedBy = "animal", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
     public List<VacinaEntity> historicoVacinacao;
 
     @Enumerated(EnumType.STRING)
     private PorteEnum porte;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_usuario")
-    public UsuarioEntity tutor;
+    private Long idTutor;
 
 }

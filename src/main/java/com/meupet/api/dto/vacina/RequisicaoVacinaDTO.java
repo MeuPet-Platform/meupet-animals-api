@@ -24,6 +24,5 @@ public class RequisicaoVacinaDTO {
     @PastOrPresent(message = "A data da vacina não pode ser no futuro.")
     private LocalDate dataVacina;
 
-    @Future(message = "A data da revacinação deve ser no futuro.")
     private LocalDate revacina;
 }
