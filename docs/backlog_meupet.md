@@ -57,7 +57,7 @@
 
 ---
 
-### HU07 - Consultar quantidade de animais por tipo
+### HU07 - Consultar quantidade de animais
 **Como** tutor,  
 **quero** visualizar quantos gatos, cachorros e aves tenho cadastrados,  
 **para que** eu possa ter uma visão geral do meu petshop ou lar.
@@ -95,34 +95,3 @@
 **para que** meus dados fiquem protegidos ao encerrar a sessão.
 
 ---
-
-### HU12 - Recuperação de senha
-**Como** usuário esquecido,  
-**quero** poder redefinir minha senha via e-mail,  
-**para que** eu recupere o acesso mesmo se esquecer.
-
----
-
-## Épico: Acesso administrativo
-
-### HU13 - Cadastrar novo animal para cliente
-**Como** administrador,  
-**quero** registrar um novo animal para um cliente,  
-**para que** ele possa ser acompanhado por um profissional.
-
----
-
-### HU14 - Gerenciar usuários do sistema
-**Como** administrador,  
-**quero** visualizar, ativar ou desativar contas de usuários,  
-**para que** eu tenha controle sobre quem acessa o sistema.
-
----
-
-### HU15 - Acompanhar histórico vacinal de todos os animais
-**Como** profissional de saúde animal,  
-**quero** acessar o histórico de vacinas de qualquer animal,  
-**para que** eu possa prestar um atendimento adequado.
-
----
-
